@@ -1,0 +1,7 @@
+PS C:\Users\Admin\Desktop\node js\Assignment\nodejs-programming\Question5EventLoop> node eventLoop.js
+Start
+End
+process.nextTick
+Promise.then
+setTimeout
+setImmediate
