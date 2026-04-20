@@ -1,0 +1,153 @@
+# 📘 Module 8: Assessment Questions (File System & Streams)
+
+---
+
+## ❓ 1. Difference between Synchronous and Asynchronous File Operations
+
+| Synchronous                 | Asynchronous                      |
+| --------------------------- | --------------------------------- |
+| Executes one task at a time | Executes tasks without blocking   |
+| Blocks the execution thread | Non-blocking (better performance) |
+| Simpler but slower          | Faster and scalable               |
+
+✅ **Example:**
+
+```js
+// Synchronous
+fs.readFileSync('file.txt', 'utf8');
+
+// Asynchronous
+fs.readFile('file.txt', 'utf8', (err, data) => {});
+```
+
+---
+
+## ❓ 2. When should you use file streams?
+
+Use **file streams** when:
+
+* Working with **large files**
+* You want to **save memory**
+* You need **continuous data processing**
+
+✅ Instead of loading the whole file, streams process it **chunk by chunk**.
+
+---
+
+## ❓ 3. Purpose of `'utf8'` encoding
+
+* Converts file data into **readable text**
+* Without encoding → returns **Buffer (binary data)**
+
+✅ Example:
+
+```js
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  console.log(data); // readable text
+});
+```
+
+---
+
+## ❓ 4. Common error codes in file system operations
+
+| Error Code | Meaning                     |
+| ---------- | --------------------------- |
+| `ENOENT`   | File or directory not found |
+| `EACCES`   | Permission denied           |
+| `EEXIST`   | File already exists         |
+| `ENOTDIR`  | Not a directory             |
+| `EMFILE`   | Too many open files         |
+
+---
+
+## ❓ 5. Safely delete a directory with all contents
+
+```js
+const fs = require('fs');
+
+fs.rm('myFolder', { recursive: true, force: true }, (err) => {
+  if (err) console.error(err);
+  else console.log("Directory deleted");
+});
+```
+
+✅ `recursive: true` → deletes all files
+✅ `force: true` → avoids errors if folder doesn't exist
+
+---
+
+## ❓ 6. Concept of Piping in Streams
+
+**Piping** connects one stream to another.
+
+✅ Example:
+
+```js
+const fs = require('fs');
+
+const readStream = fs.createReadStream('input.txt');
+const writeStream = fs.createWriteStream('output.txt');
+
+readStream.pipe(writeStream);
+```
+
+📌 Data flows automatically from **input → output**
+
+---
+
+## ❓ 7. Why is error handling important?
+
+* Prevents application crashes
+* Helps debug issues
+* Improves user experience
+
+✅ Example:
+
+```js
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error("Error:", err.message);
+    return;
+  }
+  console.log(data);
+});
+```
+
+---
+
+## ❓ 8. Difference between writeFile and appendFile
+
+| writeFile           | appendFile             |
+| ------------------- | ---------------------- |
+| Overwrites file     | Adds data to file      |
+| Deletes old content | Keeps existing content |
+
+✅ Example:
+
+```js
+// Overwrites
+fs.writeFile('file.txt', 'Hello');
+
+// Appends
+fs.appendFile('file.txt', ' World');
+```
+
+---
+
+## ⭐ Summary
+
+* Use **async operations** for performance
+* Use **streams** for large files
+* Always **handle errors**
+* Understand **file methods** properly
+
+---
+
+## 🧠 Tech Used
+
+* Node.js
+* File System (fs module)
+* Streams
+
+---
